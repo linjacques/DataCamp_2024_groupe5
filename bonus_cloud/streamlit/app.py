@@ -1,7 +1,7 @@
 import streamlit as st
 
 
-Page_acceuil = st.Page(
+Page_accueil = st.Page(
     page= "pages/Accueil.py",
     title= "Accueil",
     default=True   # indique que c'est la page par défaut = page d'accueil ! 
@@ -31,5 +31,5 @@ Page_Analyse1 = st.Page(
 
 # NavBarr
 
-NavBarr = st.navigation(pages=[Page_acceuil, Page_dashboard1, Page_PyGWalker, Page_Analyse1])
+NavBarr = st.navigation(pages=[Page_accueil, Page_dashboard1, Page_PyGWalker, Page_Analyse1])
 NavBarr.run()
