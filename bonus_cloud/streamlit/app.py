@@ -13,8 +13,12 @@ Page_dashboard1 = st.Page(
     title= "Exploration des fichiers csv",
 )
 
+Page_PyGWalker = st.Page(
+    page= "pages/pygwalker.py",
+    title= "Dashboard PygWalker",
+)
 
 # NavBarr
 
-NavBarr = st.navigation(pages=[Page_acceuil, Page_dashboard1])
+NavBarr = st.navigation(pages=[Page_acceuil, Page_dashboard1, Page_PyGWalker])
 NavBarr.run()
