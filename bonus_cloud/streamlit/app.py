@@ -13,8 +13,13 @@ Page_dashboard1 = st.Page(
     title= "Exploration de fichier csv",
 )
 
+Page_Analyse = st.Page(
+    page="pages/Analyse1.py",
+    title="Filtrer son dataset",
+
+)
+
 
 # NavBarr
-
-NavBarr = st.navigation(pages=[Page_acceuil, Page_dashboard1])
+NavBarr = st.navigation(pages=[Page_acceuil, Page_dashboard1, Page_Analyse])
 NavBarr.run()
