@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 
 st.title("Analyse dynamique des données")
 
@@ -26,11 +27,17 @@ if "dataframe" in st.session_state:
     # Créer un dictionnaire de filtres dynamiques
     filters = {}
     for col in selected_columns:
-        if df[col].dtype == "object":  # Colonne catégorielle
-            options = st.multiselect(f"Valeurs pour la colonne '{col}'", df[col].unique())
-            if options:
-                filters[col] = options
-        else:  # Colonne numérique
+
+        # Colonne catégorielle
+        if df[col].dtype == "object":  
+            # Gestion des valeurs concaténées (exemple : "Action, Aventure")
+            all_values = df[col].dropna().str.split(",").explode().str.strip().unique()
+            selected_values = st.multiselect(f"Valeurs pour la colonne '{col}'", all_values)
+            if selected_values:
+                filters[col] = selected_values
+       
+        # Colonne numérique
+        else:  
             min_val, max_val = st.slider(
                 f"Plage pour la colonne '{col}'",
                 float(df[col].min()), 
@@ -50,7 +57,11 @@ if "dataframe" in st.session_state:
            
             # Valeurs spécifiques (colonnes catégorielles)
             else:  
-                filtered_df = filtered_df[filtered_df[col].isin(condition)]
+                 # Filtrer les colonnes concaténées
+                filtered_df = filtered_df[
+                    filtered_df[col]
+                    .apply(lambda x: any(value in x.split(", ") for value in condition) if pd.notnull(x) else False)
+                ]
 
         st.subheader("Données filtrées")
         st.write(filtered_df)
