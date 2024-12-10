@@ -10,7 +10,7 @@ Page_acceuil = st.Page(
 
 Page_dashboard1 = st.Page(
     page= "pages/dashboard1.py",
-    title= "Exploration des fichiers csv",
+    title= "Exploration de fichier csv",
 )
 
 
