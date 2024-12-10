@@ -3,7 +3,7 @@ import streamlit as st
 
 Page_acceuil = st.Page(
     page= "pages/accueil.py",
-    title= "accueil",
+    title= "Accueil",
     default=True   # indique que c'est la page par défaut = page d'accueil ! 
 
 )
