@@ -3,9 +3,10 @@ import pandas as pd
 from pygwalker.api.streamlit import StreamlitRenderer
 import plotly.express as px
 
+st.title("Tableau de bords")
 
-st.set_page_config(page_title="Pygwalker App", layout="wide")
 if "dataframe" in st.session_state:
+    
     df = st.session_state["dataframe"]  
 
     if 'Note' in df.columns:

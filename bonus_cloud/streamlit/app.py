@@ -2,7 +2,7 @@ import streamlit as st
 
 
 Page_acceuil = st.Page(
-    page= "pages/accueil.py",
+    page= "pages/Accueil.py",
     title= "Accueil",
     default=True   # indique que c'est la page par défaut = page d'accueil ! 
 
@@ -26,7 +26,7 @@ Page_PyGWalker = st.Page(
 
 Page_Analyse1 = st.Page(
     page= "pages/Analyse1.py",
-    title= "Analyse 1",
+    title= "Filtrer son dataset",
 )
 
 # NavBarr
