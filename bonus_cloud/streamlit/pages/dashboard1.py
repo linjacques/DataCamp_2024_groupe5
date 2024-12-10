@@ -1,7 +1,7 @@
+import csv
 import chardet
 import pandas as pd
 import streamlit as st
-
 
 st.title("Exploration des fichiers CSV")
 
@@ -16,8 +16,7 @@ uploaded_file = st.file_uploader("Téléchargez un fichier CSV", type="csv")
 
 if uploaded_file is not None:
     # Détection de l'encodage
-    # Lire un échantillon pour détecter l'encodage (depuis le fichier téléchargé, qui est en mémoire)
-    raw_data = uploaded_file.read() 
+    raw_data = uploaded_file.read()  # Lire tout le contenu pour détecter l'encodage
     result = chardet.detect(raw_data)
     detected_encoding = result["encoding"]
 
@@ -25,11 +24,26 @@ if uploaded_file is not None:
 
     # Lecture du fichier CSV
     try:
-        # Réinitialiser le curseur du fichier avant la lecture avec Pandas
+        # Réinitialiser le curseur avant toute nouvelle lecture
         uploaded_file.seek(0)
-        df = pd.read_csv(uploaded_file, encoding=detected_encoding, quotechar='"', sep=";")
 
-        st.session_state["dataframe"] = df  # Stocker le DataFrame dans session_state pour le réutiliser sur plusieurs pages différentes
+        # Détection du séparateur
+        try:
+            sample_data = uploaded_file.read(1024).decode(detected_encoding)  # Lire un échantillon pour la détection
+            uploaded_file.seek(0)  # Réinitialiser le curseur après lecture
+            dialect = csv.Sniffer().sniff(sample_data)
+            separator = dialect.delimiter
+        except Exception:
+            st.warning("Impossible de détecter automatiquement le séparateur. Utilisation du séparateur par défaut : ','")
+            separator = ';'  # Définir un séparateur par défaut
+
+        st.write(f"**Séparateur utilisé :** `{separator}`")
+
+        # Lecture du fichier avec le séparateur détecté ou par défaut
+        df = pd.read_csv(uploaded_file, encoding=detected_encoding, quotechar='"', sep=separator)
+
+        # Stocker le DataFrame dans session_state
+        st.session_state["dataframe"] = df
 
         # Détails du fichier
         st.subheader("Détails importants")
