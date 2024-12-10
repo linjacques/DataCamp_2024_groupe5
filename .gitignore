@@ -1,7 +1,22 @@
-### Python ###
-# Byte-compiled / optimized / DLL files
+# 1. Environnement virtuel
+venv/
+env/
+*.egg-info/
+*.pyc
 __pycache__/
-*.py[cod]
-*$py.class 
+.Python
+
+# 2. Configurations système et fichiers secrets
+.DS_Store
+Thumbs.db
+.env
+
+# 3. Logs et fichiers temporaires
+logs/
+*.log
+*.tmp
+
+# 4. Streamlit fichiers temporaires et de cache
+.streamlit/
 
 
