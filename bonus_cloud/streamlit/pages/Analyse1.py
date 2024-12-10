@@ -14,17 +14,16 @@ if "dataframe" in st.session_state:
       3. Les résultats filtrés s'afficheront automatiquement, avec un aperçu des données et le nombre total de lignes correspondant aux critères.
     """)
 
-    df = st.session_state["dataframe"]  # Récupérer le DataFrame
-    #st.write(f"**Colonnes détectées :** {', '.join(df.columns)}")
+    df = st.session_state["dataframe"]  
 
-    # Sélection des colonnes pour les filtres
+    # Barre des filtres
     st.subheader("Filtres dynamiques")
     selected_columns = st.multiselect(
         "Sélectionnez les colonnes pour filtrer les données", 
         df.columns
     )
 
-    # Créer un dictionnaire de filtres dynamiques
+    # dictionnaire de filtres dynamiques
     filters = {}
     for col in selected_columns:
 
