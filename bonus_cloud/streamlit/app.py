@@ -10,7 +10,13 @@ Page_acceuil = st.Page(
 
 Page_dashboard1 = st.Page(
     page= "pages/dashboard1.py",
-    title= "Exploration des fichiers csv",
+    title= "Exploration de fichier csv",
+)
+
+Page_Analyse = st.Page(
+    page="pages/Analyse1.py",
+    title="Filtrer son dataset",
+
 )
 
 Page_PyGWalker = st.Page(
@@ -18,7 +24,12 @@ Page_PyGWalker = st.Page(
     title= "Dashboard PygWalker",
 )
 
+Page_Analyse1 = st.Page(
+    page= "pages/Analyse1.py",
+    title= "Analyse 1",
+)
+
 # NavBarr
 
-NavBarr = st.navigation(pages=[Page_acceuil, Page_dashboard1, Page_PyGWalker])
+NavBarr = st.navigation(pages=[Page_acceuil, Page_dashboard1, Page_PyGWalker, Page_Analyse1])
 NavBarr.run()
