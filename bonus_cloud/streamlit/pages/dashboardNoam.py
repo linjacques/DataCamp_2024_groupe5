@@ -1,7 +1,5 @@
 import streamlit as st
 import pandas as pd
-from pygwalker.api.streamlit import StreamlitRenderer
-import plotly.express as px
 import altair as alt
 
 st.title("Tableau de bords")
