@@ -24,9 +24,10 @@ Page_Analyse = st.Page(
 
 )
 
-Page_PyGWalker = st.Page(
-    page= "pages/pygwalker.py",
-    title= "Analyse avec Pygwalker",
+
+Page_dashboardNoam = st.Page(
+    page= "pages/dashboardNoam.py",
+    title= "Dashboard Noam",
 )
 
 Page_Analyse1 = st.Page(
@@ -39,7 +40,12 @@ Page_Tableau = st.Page(
     title= "Tableau",
 )
 
+Page_Sentiment = st.Page(
+    page= "pages/sentiment.py",
+    title="Analyse des sentiments par commentaire"
+)
+
 # NavBarr
 
-NavBarr = st.navigation(pages=[Page_accueil, Page_dashboard1, Page_dashboard2, Page_PyGWalker, Page_Analyse1, Page_Tableau])
+NavBarr = st.navigation(pages=[Page_accueil, Page_dashboard1, Page_dashboardNoam, Page_Analyse1, Page_Tableau, Page_Sentiment])
 NavBarr.run()
