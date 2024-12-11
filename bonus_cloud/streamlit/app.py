@@ -39,7 +39,12 @@ Page_Tableau = st.Page(
     title= "Tableau",
 )
 
+Page_Sentiment = st.Page(
+    page= "pages/sentiment.py",
+    title="Analyse des sentiments par commentaire"
+)
+
 # NavBarr
 
-NavBarr = st.navigation(pages=[Page_accueil, Page_dashboard1, Page_dashboard2, Page_PyGWalker, Page_Analyse1, Page_Tableau])
+NavBarr = st.navigation(pages=[Page_accueil, Page_dashboard1, Page_dashboard2, Page_PyGWalker, Page_Analyse1, Page_Tableau, Page_Sentiment])
 NavBarr.run()

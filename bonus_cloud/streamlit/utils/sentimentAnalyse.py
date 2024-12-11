@@ -19,8 +19,8 @@ if __name__ == '__main__':
         return sentiment_scores[0], sentiment_scores[1], sentiment_scores[2]
     
     # Charger le fichier CSV
-    file_path = '../data/commentaires.csv'
-    df = pd.read_csv(file_path, delimiter=';')
+    file_path = '../data/Classeur4(Allocine_Reviews).csv'
+    df = pd.read_csv(file_path, delimiter=';', encoding="latin")
 
     # Ajouter les nouvelles colonnes pour les probabilités de sentiment
     df['proba_nega'] = 0.0
