@@ -1,9 +1,7 @@
 import streamlit as st
 import pandas as pd
-from pygwalker.api.streamlit import StreamlitRenderer
-import plotly.express as px
 
-st.title("Tableau de bords")
+st.title("Analyse avec PGwalker")
 
 if "dataframe" in st.session_state:
     

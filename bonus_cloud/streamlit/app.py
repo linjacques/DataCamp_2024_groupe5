@@ -21,7 +21,7 @@ Page_Analyse = st.Page(
 
 Page_PyGWalker = st.Page(
     page= "pages/pygwalker.py",
-    title= "Dashboard PygWalker",
+    title= "Analyse avec Pygwalker",
 )
 
 Page_Analyse1 = st.Page(
@@ -29,7 +29,12 @@ Page_Analyse1 = st.Page(
     title= "Filtrer son dataset",
 )
 
+Page_dashboard2 = st.Page(
+    page= "pages/dashboard2.py",
+    title= "Analyse avec StreamLit",
+)
+
 # NavBarr
 
-NavBarr = st.navigation(pages=[Page_accueil, Page_dashboard1, Page_PyGWalker, Page_Analyse1])
+NavBarr = st.navigation(pages=[Page_accueil, Page_dashboard1, Page_dashboard2, Page_PyGWalker, Page_Analyse1])
 NavBarr.run()

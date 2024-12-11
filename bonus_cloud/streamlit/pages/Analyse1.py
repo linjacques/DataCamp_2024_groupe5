@@ -24,7 +24,7 @@ if "dataframe" in st.session_state:
     )
 
     # dictionnaire de filtres dynamiques
-    filters = {}
+    filtre = {}
     for col in selected_columns:
 
         # Colonne catégorielle
@@ -33,7 +33,7 @@ if "dataframe" in st.session_state:
             all_values = df[col].dropna().str.split(",").explode().str.strip().unique()
             selected_values = st.multiselect(f"Valeurs pour la colonne '{col}'", all_values)
             if selected_values:
-                filters[col] = selected_values
+                filtre[col] = selected_values
        
         # Colonne numérique
         else:  
@@ -43,28 +43,28 @@ if "dataframe" in st.session_state:
                 float(df[col].max()), 
                 (float(df[col].min()), float(df[col].max()))
             )
-            filters[col] = (min_val, max_val)
+            filtre[col] = (min_val, max_val)
 
      # Filtrer les données en fonction des sélections
-    if filters:
-        filtered_df = df.copy()
-        for col, condition in filters.items():
+    if filtre:
+        df_filtre = df.copy()
+        for col, condition in filtre.items():
 
             # Plage de valeurs (colonnes numériques)
             if isinstance(condition, tuple):  
-                filtered_df = filtered_df[(filtered_df[col] >= condition[0]) & (filtered_df[col] <= condition[1])]
+                df_filtre = df_filtre[(df_filtre[col] >= condition[0]) & (df_filtre[col] <= condition[1])]
            
             # Valeurs spécifiques (colonnes catégorielles)
             else:  
                  # Filtrer les colonnes concaténées
-                filtered_df = filtered_df[
-                    filtered_df[col]
+                df_filtre = df_filtre[
+                    df_filtre[col]
                     .apply(lambda x: any(value in x.split(", ") for value in condition) if pd.notnull(x) else False)
                 ]
 
         st.subheader("Données filtrées")
-        st.write(filtered_df)
-        st.write(f"**Nombre de lignes après filtrage :** {len(filtered_df)}")
+        st.write(df_filtre)
+        st.write(f"**Nombre de lignes après filtrage :** {len(df_filtre)}")
     else:
         st.info("Aucun filtre appliqué. Affichage des données originales.")
         st.dataframe(df)
