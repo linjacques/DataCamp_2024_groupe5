@@ -13,6 +13,11 @@ Page_dashboard1 = st.Page(
     title= "Exploration de fichier csv",
 )
 
+Page_dashboard2 = st.Page(
+    page= "pages/dashboard2.py",
+    title= "Analyse avec Streamlit",
+)
+
 Page_Analyse = st.Page(
     page="pages/Analyse1.py",
     title="Filtrer son dataset",
@@ -29,12 +34,12 @@ Page_Analyse1 = st.Page(
     title= "Filtrer son dataset",
 )
 
-Page_dashboard2 = st.Page(
-    page= "pages/dashboard2.py",
-    title= "Analyse avec StreamLit",
+Page_Tableau = st.Page(
+    page= "pages/tableautest.py",
+    title= "Tableau",
 )
 
 # NavBarr
 
-NavBarr = st.navigation(pages=[Page_accueil, Page_dashboard1, Page_dashboard2, Page_PyGWalker, Page_Analyse1])
+NavBarr = st.navigation(pages=[Page_accueil, Page_dashboard1, Page_dashboard2, Page_PyGWalker, Page_Analyse1, Page_Tableau])
 NavBarr.run()
