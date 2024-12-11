@@ -29,7 +29,12 @@ Page_Analyse1 = st.Page(
     title= "Filtrer son dataset",
 )
 
+Page_Tableau = st.Page(
+    page= "pages/tableautest.py",
+    title= "Tableau",
+)
+
 # NavBarr
 
-NavBarr = st.navigation(pages=[Page_accueil, Page_dashboard1, Page_PyGWalker, Page_Analyse1])
+NavBarr = st.navigation(pages=[Page_accueil, Page_dashboard1, Page_PyGWalker, Page_Analyse1, Page_Tableau])
 NavBarr.run()
