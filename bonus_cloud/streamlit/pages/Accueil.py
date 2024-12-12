@@ -69,11 +69,22 @@ except FileNotFoundError:
 except Exception as e:
     st.error(f"Une erreur inattendue est survenue : {e}")
 
-st.write("### Pages disponibles")
-st.write("""
-1. **Exploration de fichier CSV** : Explorez les données brutes du fichier CSV ainsi que quelques détails sur le fichier.
-2. **Dashboard Noam** : Visualisez des statistiques sur les films à partir de Streamlit.
-3. **Filtrer son dataset** : Filtrez les données selon des critères spécifiques.
-4. **Tableau** : Intégration d'un tableau de bord Tableau Public.
-5. **Analyse des sentiments par commentaire** : Analysez les sentiments des commentaires des films grâce à une intelligence artificielle.
-""")
+st.title("Aperçu des Pages")
+
+st.subheader("Accueil")
+st.write("Cette page principale vous guide dans l'exploration et l'analyse des données. Vous y trouverez un aperçu global des fonctionnalités de l'application.")
+
+st.subheader("Exploration Interactive des Données CSV")
+st.write("Plongez dans vos fichiers CSV grâce à une interface interactive. Visualisez et analysez les données en détail, tout en explorant les colonnes, les types de données et un échantillon des enregistrements.")
+
+st.subheader("Analyse Visuelle des Notes : Tendances et Répartitions")
+st.write("Découvrez des graphiques détaillés pour analyser les notes des films. Identifiez les tendances, comparez les genres, et comprenez la répartition des notes.")
+
+st.subheader("Visualisation des Données avec Tableau")
+st.write("Profitez d'une intégration avec le logiciel Tableau pour une exploration avancée des données via des tableaux de bord interactifs et puissants.")
+
+st.subheader("Analyse Automatisée des Sentiments avec Roberta")
+st.write("Une intelligence artificielle analyse les commentaires pour déterminer leur tonalité : positive, neutre ou négative. Découvrez rapidement l'humeur générale des spectateurs.")
+
+st.subheader("Analyse des films")
+st.write("Accédez à des insights spécifiques sur les films, combinant notes, genres et commentaires pour une vision complète des préférences et des critiques.")
