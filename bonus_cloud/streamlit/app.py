@@ -4,30 +4,22 @@ import streamlit as st
 Page_accueil = st.Page(
     page= "pages/Accueil.py",
     title= "Accueil",
-    default=True   # indique que c'est la page par défaut = page d'accueil ! 
+    default=True 
 
 )
-
 Page_dashboard1 = st.Page(
     page= "pages/dashboard1.py",
     title= "Exploration de fichier csv",
 )
-
-Page_dashboard2 = st.Page(
-    page= "pages/dashboard2.py",
-    title= "Analyse avec Streamlit",
-)
-
 Page_Analyse = st.Page(
     page="pages/Analyse1.py",
     title="Filtrer son dataset",
 
 )
 
-
-Page_dashboardNoam = st.Page(
-    page= "pages/dashboardNoam.py",
-    title= "Dashboard Noam",
+Page_dashboard = st.Page(
+    page= "pages/dashboard.py",
+    title= "Dashboard",
 )
 
 Page_Analyse1 = st.Page(
@@ -47,5 +39,5 @@ Page_Sentiment = st.Page(
 
 # NavBarr
 
-NavBarr = st.navigation(pages=[Page_accueil, Page_dashboard1, Page_dashboardNoam, Page_Analyse1, Page_Tableau, Page_Sentiment])
+NavBarr = st.navigation(pages=[Page_accueil, Page_dashboard1, Page_dashboard, Page_Analyse1, Page_Tableau, Page_Sentiment])
 NavBarr.run()

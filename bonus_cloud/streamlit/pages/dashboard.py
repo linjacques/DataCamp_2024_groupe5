@@ -3,6 +3,7 @@ import pandas as pd
 import altair as alt
 from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
+import plotly.express as px
 
 st.title("Tableau de bords")
 
@@ -19,6 +20,49 @@ if "dataframe" in st.session_state:
         else:
                 st.error("La colonne 'Note' est absente du fichier CSV. Veuillez vérifier vos données.")
 
+    def display_mean_note_by_genre(df):
+        st.sidebar.title("Filtres")
+        df_filtre = df.copy()
+              # Filtrer par genre
+        if 'Genre 1' in df.columns:
+                genres = st.sidebar.multiselect("Filtrer par Genre", options=df_filtre['Genre 1'].dropna().unique())
+                if genres:
+                        df_filtre = df_filtre[df_filtre['Genre 1'].isin(genres)]
+
+        # Filtrer par date
+        if 'Date' in df.columns:
+                df_filtre['Date'] = pd.to_datetime(df_filtre['Date'], errors='coerce')
+                min_date, max_date = st.sidebar.slider("Filtrer par Date", 
+                                                value=(df_filtre['Date'].min(), df_filtre['Date'].max()), 
+                                                format="YYYY-MM-DD")
+                df_filtre = df_filtre[(df_filtre['Date'] >= min_date) & (df_filtre['Date'] <= max_date)]
+
+        # Vérification des données avant calcul de la Moyenne
+        if 'Genre 1' in df_filtre.columns and 'Note' in df_filtre.columns:
+                df_filtre['Note'] = pd.to_numeric(df_filtre['Note'], errors='coerce', downcast='float')  # Convertir les notes en numérique
+
+        
+                # Calculer la Moyenne des notes par genre
+                medianne_des_notes_par_genre = df_filtre.groupby('Genre 1')['Note'].mean().sort_values(ascending=False)
+
+                st.write("### Moyenne des Notes par Genre")
+                fig_median_genre = px.bar(
+                medianne_des_notes_par_genre, 
+                x=medianne_des_notes_par_genre.index, 
+                y=medianne_des_notes_par_genre.values, 
+                labels={'x': 'Genre', 'y': 'Moyenne des Notes'},
+                title="Genres de Films avec les Meilleures Notes",
+                text_auto='.2f' 
+                )
+                fig_median_genre.update_layout(
+                xaxis_tickangle=-45,
+                xaxis_title="Genre",
+                yaxis_title="Moyenne des Notes",
+                coloraxis_showscale=True,
+                title_font_size=18
+                )
+                st.plotly_chart(fig_median_genre)
+
     # Moyenne des notes par année
     def display_mean_note_by_year(df):
         if 'Date de publication' in df.columns and 'Note' in df.columns:
@@ -30,7 +74,7 @@ if "dataframe" in st.session_state:
 
                 moyenne_par_annee = df.groupby('Annee')['Note'].mean().dropna()
 
-                st.write("### Tableau des moyennes par année")
+                st.write("### Evolution de la moyenne des notes par année")
                 st.line_chart(moyenne_par_annee)
         else:
                 st.error("Les colonnes 'Date de publication' ou 'Note' sont absentes du fichier CSV. Veuillez vérifier vos données.")
@@ -63,9 +107,9 @@ if "dataframe" in st.session_state:
                                 alt.Tooltip('Note', title='Note Moyenne', format='.2f')
                         ]
                         ).properties(
-                        title='Moyenne des notes par année et par genre'
+                        title="Comparaison de l'évolution de la moyenne des notes par année et par genre"
                         ).interactive()
-
+                        st.write("### Evolution de la moyenne des notes par année et par genre")
                         st.altair_chart(chart, use_container_width=True)
                 else:
                         st.error("Veuillez sélectionner au moins un genre à afficher.")
@@ -98,6 +142,7 @@ if "dataframe" in st.session_state:
             )
         
     display_note_distribution(df)
+    display_mean_note_by_genre(df)
     display_mean_note_by_year(df)
     display_mean_note_by_year_by_genre(df)
     generate_wordcloud(df)
