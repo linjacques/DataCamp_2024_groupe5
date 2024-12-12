@@ -21,13 +21,7 @@ if "dataframe" in st.session_state:
                 st.error("La colonne 'Note' est absente du fichier CSV. Veuillez vérifier vos données.")
 
     def display_mean_note_by_genre(df):
-        st.sidebar.title("Filtres")
         df_filtre = df.copy()
-              # Filtrer par genre
-        if 'Genre 1' in df.columns:
-                genres = st.sidebar.multiselect("Filtrer par Genre", options=df_filtre['Genre 1'].dropna().unique())
-                if genres:
-                        df_filtre = df_filtre[df_filtre['Genre 1'].isin(genres)]
 
         # Filtrer par date
         if 'Date' in df.columns:

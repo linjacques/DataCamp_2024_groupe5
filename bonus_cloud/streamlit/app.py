@@ -19,7 +19,7 @@ Page_Analyse = st.Page(
 
 Page_dashboard = st.Page(
     page= "pages/dashboard.py",
-    title= "Dashboard",
+    title= "Dashboard Streamlit",
 )
 
 Page_Analyse1 = st.Page(
