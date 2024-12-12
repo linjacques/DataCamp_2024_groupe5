@@ -113,7 +113,7 @@ def display_movie_info(movie_data, movie_reviews, all_data):
 st.title("Analyse des Films")
 
 # Chemin d'accès au fichier CSV
-CSV_FILE_PATH = "output/sentiments_resultat_final.csv"
+CSV_FILE_PATH = "bonus_cloud/streamlit/output/sentiments_resultat_final.csv"
 
 data = load_data(CSV_FILE_PATH)
 
