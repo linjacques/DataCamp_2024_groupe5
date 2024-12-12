@@ -7,11 +7,6 @@ Page_accueil = st.Page(
     default=True 
 )
 
-Page_propriete_dataset = st.Page(
-    page= "pages/Analyse_propriete_csv.py",
-    title= "Propriétés du Dataset Allociné_dataset_89bcdf92.csv",
-)
-
 Page_Analyse_csv = st.Page(
     page="pages/Analyse_csv.py",
     title="Exploration Interactive des Données CSV",
@@ -35,7 +30,7 @@ Page_Sentiment = st.Page(
 # NavBarr
 
 NavBarr = st.navigation ( pages = [
-    Page_accueil,Page_propriete_dataset, Page_Analyse_csv,Page_Analyse_notes,
+    Page_accueil, Page_Analyse_csv,Page_Analyse_notes,
     Page_Tableau, Page_Sentiment
 ] )
 
