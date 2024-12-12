@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import altair as alt
+from wordcloud import WordCloud, STOPWORDS
+import matplotlib.pyplot as plt
 
 st.title("Tableau de bords")
 
@@ -68,6 +70,24 @@ if "dataframe" in st.session_state:
                 else:
                         st.error("Veuillez sélectionner au moins un genre à afficher.")
 
+    def generate_wordcloud(df):
+        film_titles = df['Titre du film'].unique()
+        selected_film_title = st.selectbox("Sélectionner un titre de film", options=film_titles)
+
+        filtered_comments = df[df['Titre du film'] == selected_film_title]['Commentaire'].str.cat(sep=' ')
+
+        stopwords_fr = STOPWORDS.union({'le', 'la', 'les', 'un', 'une', 'de', 'et', 'à', 'dans', 'ce', 'ces', 'pour', 'est', 'en', 'sur', 'qui', 'ce','se','que', 'mais', 'sont', 'avec','cest',"c'est",'plus', 'aux', 'ou', 'il', 'du', 'au', 'ne', 'pas', 'des', 'dun', 'une', 'par', 'comme', 'ont', 'leur', 'leurs', 'ils', 'elles', 'tout', 'tous', 'toutes', 'faire', 'fait', 'faite', 'faits', 'film','son', 'je', 'ça', 'ses', 'cette', 'très', 'vous', 'nous', 'meme', 'même', 'aussi'})
+        
+        wordcloud = WordCloud(width=800, height=400, background_color='white', stopwords=stopwords_fr).generate(filtered_comments)
+        st.write("### Nuage de mots pour le film sélectionné")
+        fig, ax = plt.subplots(figsize=(10, 5))
+        ax.imshow(wordcloud, interpolation='bilinear')
+        ax.axis("off")
+        st.pyplot(fig)
+        plt.imshow(wordcloud, interpolation='bilinear')
+        plt.axis("off")
+        plt.show()
+
     def display_csv(df):
         csv = df.to_csv(index=False) 
         st.download_button(
@@ -80,6 +100,7 @@ if "dataframe" in st.session_state:
     display_note_distribution(df)
     display_mean_note_by_year(df)
     display_mean_note_by_year_by_genre(df)
+    generate_wordcloud(df)
     display_csv(df)
 
 else:
