@@ -27,11 +27,16 @@ Page_Sentiment = st.Page(
     title="Analyse Automatisée des Sentiments avec Roberta"
 )
 
+Page_AnalyseMetier = st.Page(
+    page= "pages/analyse_metier.py",
+    title="Analyse des films"
+)
+
 # NavBarr
 
 NavBarr = st.navigation ( pages = [
     Page_accueil, Page_Analyse_csv,Page_Analyse_notes,
-    Page_Tableau, Page_Sentiment
+    Page_Tableau, Page_Sentiment, Page_AnalyseMetier
 ] )
 
 NavBarr.run()
