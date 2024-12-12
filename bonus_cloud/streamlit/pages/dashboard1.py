@@ -2,8 +2,6 @@ import csv
 import chardet
 import pandas as pd
 import streamlit as st
-import os
-st.write(f"Répertoire courant : {os.getcwd()}")
 
 st.title("Exploration des fichiers CSV")
 
