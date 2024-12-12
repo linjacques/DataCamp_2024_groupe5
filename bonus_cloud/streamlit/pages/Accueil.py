@@ -70,8 +70,10 @@ except Exception as e:
     st.error(f"Une erreur inattendue est survenue : {e}")
 
 st.write("### Pages disponibles")
-st.write("1. **Exploration de fichier csv** : Explorez les données brutes du fichier CSV ainsi que quelques détails sur le fichier.")
-st.write("2. **Dashboard Noam** : Visualisez des statistiques sur les films à partir de Streamlit.")
-st.write("3. **Filtrer son dataset** : Filtrer les données selon des critères spécifiques.")
-st.write("4. **Tableau** : Intégration d'un tableau de bord Tableau Public.")
-st.write("5. **Analyse des sentiments par commentaire** : Analysez les sentiments des commentaires des films.")
+st.write("""
+1. **Exploration de fichier CSV** : Explorez les données brutes du fichier CSV ainsi que quelques détails sur le fichier.
+2. **Dashboard Noam** : Visualisez des statistiques sur les films à partir de Streamlit.
+3. **Filtrer son dataset** : Filtrez les données selon des critères spécifiques.
+4. **Tableau** : Intégration d'un tableau de bord Tableau Public.
+5. **Analyse des sentiments par commentaire** : Analysez les sentiments des commentaires des films grâce à une intelligence artificielle.
+""")
