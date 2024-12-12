@@ -5,39 +5,38 @@ Page_accueil = st.Page(
     page= "pages/Accueil.py",
     title= "Accueil",
     default=True 
-
-)
-Page_dashboard1 = st.Page(
-    page= "pages/dashboard1.py",
-    title= "Exploration de fichier csv",
-)
-Page_Analyse = st.Page(
-    page="pages/Analyse1.py",
-    title="Filtrer son dataset",
-
 )
 
-Page_dashboard = st.Page(
-    page= "pages/dashboard.py",
-    title= "Dashboard Streamlit",
+Page_propriete_dataset = st.Page(
+    page= "pages/Analyse_propriete_csv.py",
+    title= "Propriétés du Dataset Allociné_dataset_89bcdf92.csv",
 )
 
-Page_Analyse1 = st.Page(
-    page= "pages/Analyse1.py",
-    title= "Filtrer son dataset",
+Page_Analyse_csv = st.Page(
+    page="pages/Analyse_csv.py",
+    title="Exploration Interactive des Données CSV",
+)
+
+Page_Analyse_notes = st.Page(
+    page= "pages/Analyse_notes.py",
+    title= "Analyse Visuelle des Notes : Tendances et Répartitions",
 )
 
 Page_Tableau = st.Page(
-    page= "pages/tableautest.py",
-    title= "Tableau",
+    page= "pages/Analyse_tableau.py",
+    title= "Visualisation des Données avec Tableau ",
 )
 
 Page_Sentiment = st.Page(
-    page= "pages/sentiment.py",
-    title="Analyse des sentiments par commentaire"
+    page= "pages/Analyse_sentiments.py",
+    title="Analyse Automatisée des Sentiments avec Roberta"
 )
 
 # NavBarr
 
-NavBarr = st.navigation(pages=[Page_accueil, Page_dashboard1, Page_dashboard, Page_Analyse1, Page_Tableau, Page_Sentiment])
+NavBarr = st.navigation ( pages = [
+    Page_accueil, Page_propriete_dataset, Page_Analyse_notes,
+    Page_Tableau, Page_Sentiment
+] )
+
 NavBarr.run()
