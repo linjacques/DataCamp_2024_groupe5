@@ -35,7 +35,7 @@ Page_Sentiment = st.Page(
 # NavBarr
 
 NavBarr = st.navigation ( pages = [
-    Page_accueil, Page_Analyse_csv,Page_propriete_dataset, Page_Analyse_notes,
+    Page_accueil,Page_propriete_dataset, Page_Analyse_csv,Page_Analyse_notes,
     Page_Tableau, Page_Sentiment
 ] )
 
