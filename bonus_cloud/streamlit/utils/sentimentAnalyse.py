@@ -1,6 +1,5 @@
 from transformers import AutoTokenizer, RobertaForSequenceClassification
 import torch
-from sklearn.preprocessing import LabelEncoder
 import pandas as pd
 
 if __name__ == '__main__':
