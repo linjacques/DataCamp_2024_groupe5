@@ -2,45 +2,44 @@ import csv
 import chardet
 import pandas as pd
 import streamlit as st
+import os
+st.write(f"Répertoire courant : {os.getcwd()}")
 
 st.title("Exploration des fichiers CSV")
 
 st.markdown("""
-### Instructions :
-1. Cliquez sur le bouton **"Parcourir les fichiers"** pour importer un fichier CSV.
-2. Une fois le fichier importé, son contenu sera affiché sous forme de tableau.
+### Aperçu du fichier
 """)
 
-# Charger le fichier
-uploaded_file = st.file_uploader("Téléchargez un fichier CSV", type="csv")
+# Chemin du fichier
+file_path = "output/Allociné_dataset_89bcdf92.csv"
 
-if uploaded_file is not None:
-    # Détection de l'encodage
-    raw_data = uploaded_file.read()  # Lire tout le contenu pour détecter l'encodage
-    result = chardet.detect(raw_data)
-    detected_encoding = result["encoding"]
+# Lecture et détection de l'encodage
+try:
+    with open(file_path, "rb") as f:
+        raw_data = f.read()
+        result = chardet.detect(raw_data)
+        detected_encoding = result["encoding"]
 
     st.write(f"**Encodage détecté :** {detected_encoding}")
 
     # Lecture du fichier CSV
     try:
-        # Réinitialiser le curseur avant toute nouvelle lecture
-        uploaded_file.seek(0)
-
-        # Détection du séparateur
-        try:
-            sample_data = uploaded_file.read(1024).decode(detected_encoding)  # Lire un échantillon pour la détection
-            uploaded_file.seek(0)  # Réinitialiser le curseur après lecture
-            dialect = csv.Sniffer().sniff(sample_data)
-            separator = dialect.delimiter
-        except Exception:
-            st.warning("Impossible de détecter automatiquement le séparateur. Utilisation du séparateur par défaut : ','")
-            separator = ';'  # Définir un séparateur par défaut
+        with open(file_path, "r", encoding=detected_encoding) as f:
+            # Détection du séparateur
+            try:
+                sample_data = f.read(1024)  # Lire un échantillon pour la détection
+                f.seek(0)  # Réinitialiser le curseur après lecture
+                dialect = csv.Sniffer().sniff(sample_data)
+                separator = dialect.delimiter
+            except Exception:
+                st.warning("Impossible de détecter automatiquement le séparateur. Utilisation du séparateur par défaut : ','")
+                separator = ';'  # Définir un séparateur par défaut
 
         st.write(f"**Séparateur utilisé :** `{separator}`")
 
         # Lecture du fichier avec le séparateur détecté ou par défaut
-        df = pd.read_csv(uploaded_file, encoding=detected_encoding, quotechar='"', sep=separator)
+        df = pd.read_csv(file_path, encoding=detected_encoding, quotechar='"', sep=separator)
 
         # Stocker le DataFrame dans session_state
         st.session_state["dataframe"] = df
@@ -57,8 +56,11 @@ if uploaded_file is not None:
         # Aperçu des données
         st.subheader("Aperçu des données")
         st.dataframe(df.head(10))
- 
+
     except Exception as e:
         st.error(f"Erreur lors de la lecture du fichier : {e}")
-else:
-    st.info("Veuillez télécharger un fichier CSV pour commencer.")
+
+except FileNotFoundError:
+    st.error(f"Le fichier spécifié n'a pas été trouvé : {file_path}")
+except Exception as e:
+    st.error(f"Une erreur inattendue est survenue : {e}")

@@ -70,7 +70,7 @@ def remove_stopwords(text):
 # Appliquer le nettoyage à la colonne de texte
 df_nettoye[col_texte] = df_nettoye[col_texte].apply(remove_stopwords)
 
-output_file_path = f"../../output/{unique_id}.csv"
+output_file_path = f"../../output/Allociné_dataset_{unique_id}.csv"
 
 df_nettoye.to_csv(output_file_path, index=False, sep=";", encoding="utf-8")
 
