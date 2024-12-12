@@ -31,7 +31,7 @@ try:
                 dialect = csv.Sniffer().sniff(sample_data)
                 separator = dialect.delimiter
             except Exception:
-                st.warning("Impossible de détecter automatiquement le séparateur. Utilisation du séparateur par défaut : ','")
+                st.warning("Impossible de détecter automatiquement le séparateur. Utilisation du séparateur par défaut :  ' ; ' ")
                 separator = ';'  # Définir un séparateur par défaut
 
         st.write(f"**Séparateur utilisé :** `{separator}`")
