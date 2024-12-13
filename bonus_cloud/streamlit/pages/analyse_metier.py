@@ -21,16 +21,9 @@ st.set_page_config(
 # Titre principal stylisé
 st.markdown(
     """
-    <div style="
-        background-color: #cce7f5; 
-        padding: 20px; 
-        border-radius: 10px; 
-        text-align: center; 
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);">
-        <h1 style="color: #1a73e8; font-family: Arial, sans-serif; font-size: 2.5em; margin: 0;">
+        <h1 style="color: #1a73e8; font-family: Arial, sans-serif; font-size: 2.5em; margin: 0; text-align: center;">
             🎥 Analyse des Films
         </h1>
-    </div>
     """,
     unsafe_allow_html=True
 )
