@@ -1,4 +1,4 @@
-# Projet Data Camp groupe 5 :
+# Datacamp Groupe 5 :
 
 - Amir ANCIAUX
 - Noam BOULZE
@@ -6,47 +6,108 @@
 - Jacques LIN
 - Thomas YU
 
-## ALLOCINE / IMDb
+## Datacamp
 
-Bienvenue dans le README de notre projet Data Camp.
+Bienvenue dans le README de notre projet Datacamp. 
+Ce document vous guide pas à pas pour installer, utiliser et comprendre les différentes étapes de notre projet.
 
-Pour commencer, il faut commencer par récupérer les fichiers et installer toutes les dépendances.
+---
 
-On télécharge le dépôt Github :
+## Installation
+
+### 1. Cloner le dépôt GitHub
+
+Pour récupérer le projet, utilisez la commande suivante dans votre terminal, via l'éditeur de code de votre choix :
+
 ```bash
 git clone https://github.com/linjacques/DataCamp_2024_groupe5
 ```
 
-Ici on va installer toutes les dépendances requises dans un fichier requirements.txt :
+### 2. Installer les dépendances
+
+Une fois le dépôt cloné, installez les dépendances nécessaires en exécutant la commande suivante :
+
 ```bash
 pip install -r requirements.txt
 ```
 
-Enfin on va pouvoir lancer le code, en exécutant le fichier Python dans [Visual Studio Code](https://code.visualstudio.com/), [Jupyter Notebook](https://jupyter.org/) ou un autre éditeur de code.
+### 3. Lancer l'application en local
 
-Pour la visualisation il faudra installer [Streamlit](https://streamlit.io/).
+Rendez-vous dans le dossier `streamlit` situé dans `bonus_cloud` et lancez l'application avec la commande suivante :
 
-Dans le dépot github vous retrouverez le fichier csv brut des données, que l'on récupère après le webscrapping et le fichier csv finale que l'on récupère pour l'analyse de données.
+```bash
+streamlit run .\app.py
+```
 
-# Comment ça fonctionne ?
+Cela ouvrira une version locale de l'application dans votre navigateur.
 
-## Le scrapping de données : 
+### 4. Accéder à la version cloud
 
-La première partie du code est dédiée au webscrapping, en effet pour nôtre problématique il n'existe pas de dataset déjà fait sur lequel on aurais qu'à faire de l'analyse de sentiment et de la visualisation à partir de ses résultats. 
-On va devoir récupérer nous-même les données.
-On a récupéré les données des sites [AlloCiné](https://www.allocine.fr/), [IMDb](https://www.imdb.com/) plus spécifiquement la liste des avis de films ou de séries.
+Pour accéder à la version cloud de l'application, utilisez ce lien :
+[Streamlit Cloud App](https://linjacques-datacamp-2024-groupe5-bonus-cloudstreamlitapp-og7ob2.streamlit.app/).
 
-## L'analyse de sentiment :
+Nous recommandons d'utiliser cette version cloud pour tester et manipuler toutes les fonctionnalités sans configuration supplémentaire.
 
-Pour l'analyse de sentiment, on utlisera [roBERTa](https://huggingface.co/docs/transformers/model_doc/roberta).
+---
 
-## La visualisation :
+## Fonctionnement du projet
 
-La visualisation sera faite pour créer des dashboards interactifs et montrer comment on pourra interpréter nos données.
+### 1. Scrapping de données
 
-## Le déploiement sur le cloud : 
+Notre projet commence par une étape de **web scraping** car il n'existait pas de dataset adapté à notre problématique. Nous avons récupéré les données à partir de sites d'avis de films tels que :
 
-Le deploiement se fera sur Streamlit 
+- [AlloCiné](https://www.allocine.fr/)
+- [Rottentomatoes](https://rottentomatoes.com/)
+
+Pour ce faire, nous avons utilisé plusieurs librairies Python :
+
+- **BeautifulSoup** : pour extraire les éléments HTML nécessaires.
+- **Scrapy** : pour parcourir et collecter les données de manière performante.
+- **Selenium** : pour manipuler les pages dynamiques nécessitant du JavaScript.
+
+L'utilisation combinée de ces librairies a permis de répondre aux exigences du **BONUS** technique.
+
+### 2. Nettoyage des données
+
+Les données brutes issues du scraping ont été nettoyées et standardisées pour être exploitables. Voici les principales étapes :
+
+- **Formatage des dates** : les dates (de sortie et de commentaires) ont été converties au format standard `DD/MM/YYYY`.
+- **Standardisation des notes** :
+  - Remplacement des valeurs non adaptées par `NULL`.
+  Les valeurs `NULL` sont quand à eux aussi remplacer par la moyenne des notes collectées pour le film en question.
+  - Conversion des formats, par exemple `3,5` en `3.5`.
+- **Uniformisation des URLs** :
+  - Une boucle a été créée pour nettoyer et standardiser les URLs.
+  - Conversion des noms en minuscules avec des underscores pour Rotten Tomatoes.
+- **Gestion des utilisateurs** :
+  - Si un nom était absent, l'utilisateur était désigné comme "Visiteur".
+  - Sinon, le nom ou un ID utilisateur a été enregistré.
+- **Filtrage des mots** : Suppression des mots vides (*stopwords*) et des termes vulgaires en français et anglais.
+
+### 3. Analyse de sentiment
+
+Pour analyser les sentiments exprimés dans les commentaires, nous avons utilisé le modèle pré-entraîné **roBERTa** via la librairie [Transformers](https://huggingface.co/docs/transformers).
+
+- **Modèle final** :
+  - Après avoir testé plusieurs modèles (notamment avec des datasets spécifiques d'AlloCiné), nous avons retenu `lyxuand/distilbert`, qui s'est révélé le plus performant.
+- **Pipeline** :
+  - Extraction des sentiments (positif, négatif, neutre) directement utilisable dans l'interface graphique.
+
+### 4. Visualisation des données
+
+Pour présenter les résultats de manière intuitive, nous avons développé des visualisations interactives via **Streamlit** et **Tableau** :
+
+- **Dashboards dynamiques** : pour explorer et analyser les données.
+- **Nuage de mots** : réalisé avec la librairie **WordCloud** pour mettre en avant les termes les plus fréquents.
+- **Graphiques simples et clairs** : tels que des histogrammes et des diagrammes circulaires pour une compréhension rapide.
+
+### 5. Déploiement sur le cloud
+
+Le déploiement a été effectué sur **Streamlit Cloud**, qui offre une intégration fluide avec notre repository GitHub. L'interface utilisateur est conviviale, permettant de tester toutes les fonctionnalités sans avoir à exécuter de code localement.
+
+Lien de l'application déployée : [Streamlit Cloud App](https://linjacques-datacamp-2024-groupe5-bonus-cloudstreamlitapp-og7ob2.streamlit.app/).
+
+---
 
 ## Contribution
 
@@ -54,7 +115,6 @@ Les contributions font de la communauté open source un endroit incroyable pour 
 Toute contribution que vous apportez est **grandement appréciée**.
 
 Si vous avez une suggestion pour améliorer ce projet, veuillez forker le dépôt et créer une pull request.
-Vous pouvez également ouvrir une issue avec le tag "enhancement".
 N'oubliez pas de donner une étoile au projet !
 Merci encore !
 
@@ -64,7 +124,7 @@ Merci encore !
 4. Poussez vers la branche (git push origin feature/NouvelleFonctionnalité)
 5. Créez une Pull Request
 
-### Contact
+## Contact
 
 > Product Owner : Thomas Y.
 
