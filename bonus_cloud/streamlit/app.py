@@ -33,7 +33,6 @@ Page_AnalyseMetier = st.Page(
 )
 
 # NavBarr
-
 NavBarr = st.navigation ( pages = [
     Page_accueil, Page_Analyse_csv,Page_Analyse_notes,
     Page_Tableau, Page_Sentiment, Page_AnalyseMetier
