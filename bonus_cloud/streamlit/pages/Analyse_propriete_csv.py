@@ -10,7 +10,7 @@ st.markdown("""
 """)
 
 # Chemin du fichier
-file_path = "bonus_cloud/streamlit/output/Allociné_dataset_89bcdf92.csv"
+file_path = "output/Allociné_dataset_89bcdf92.csv"
 
 # Lecture et détection de l'encodage
 try:

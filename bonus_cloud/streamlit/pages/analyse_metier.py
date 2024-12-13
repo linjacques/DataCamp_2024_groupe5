@@ -33,7 +33,8 @@ st.markdown(
 def load_data(file_path):
     data = pd.read_csv(file_path, sep=';', encoding='utf-8')
     data['Note'] = pd.to_numeric(data['Note'].str.replace(',', '.'), errors='coerce')
-    data['etoiles_ia'] = pd.to_numeric(data['etoiles_ia'], errors='coerce')
+    data['Note IA'] = pd.to_numeric(data['Note IA'], errors='coerce')
+    # Convertir les dates en toute lettre en datetime
     data['Date de publication'] = pd.to_datetime(data['Date de publication'], errors='coerce', dayfirst=True)
     return data
 
@@ -60,7 +61,7 @@ def display_movie_info(movie_data, movie_reviews, all_data):
     # Notes globales
     st.markdown("<h3 style='color: #1a73e8;'>⭐ Avis Généraux</h3>", unsafe_allow_html=True)
     average_note = movie_reviews['Note'].mean()
-    average_ia_stars = movie_reviews['etoiles_ia'].mean()
+    average_ia_stars = movie_reviews['Note IA'].mean()
     st.write(f"**Note moyenne des utilisateurs :** {average_note:.2f}/5")
     st.write(f"**Note moyenne IA :** {average_ia_stars:.2f}/5")
 
@@ -72,11 +73,11 @@ def display_movie_info(movie_data, movie_reviews, all_data):
 
     # Performances des sites d'avis
     st.markdown("<h3 style='color: #1a73e8;'>🌐 Performances des Sites d'Avis</h3>", unsafe_allow_html=True)
-    grouped_reviews = movie_reviews.groupby('URL de la critique')[['Note', 'etoiles_ia']].mean()
+    grouped_reviews = movie_reviews.groupby('URL de la critique')[['Note', 'Note IA']].mean()
     st.dataframe(grouped_reviews)
 
     # Identifier le site le plus cohérent
-    grouped_reviews['Écart'] = abs(grouped_reviews['Note'] - grouped_reviews['etoiles_ia'])
+    grouped_reviews['Écart'] = abs(grouped_reviews['Note'] - grouped_reviews['Note IA'])
     best_site = grouped_reviews['Écart'].idxmin()
     st.write(f"💡 **Site le plus aligné avec l'analyse IA :** {best_site}")
 
@@ -93,7 +94,7 @@ def display_movie_info(movie_data, movie_reviews, all_data):
 
 # Interface Streamlit
 st.sidebar.header("🎬 Sélectionnez un Film")
-CSV_FILE_PATH = "bonus_cloud/streamlit/output/sentiments_resultat_final.csv"
+CSV_FILE_PATH = "output/sentiments_resultat_final.csv"
 data = load_data(CSV_FILE_PATH)
 
 # Sélection du film
