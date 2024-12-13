@@ -99,16 +99,20 @@ if "dataframe" in st.session_state:
                 st.error("Veuillez sélectionner au moins un genre.")
 
     def generate_wordcloud(df):
-        st.markdown("<h2 style='color: #1a73e8;'>☁️ Nuage de Mots</h2>", unsafe_allow_html=True)
-        if 'Commentaire' in df.columns:
-            selected_title = st.selectbox("Sélectionner un titre de film", df['Titre du film'].unique())
-            comments = df[df['Titre du film'] == selected_title]['Commentaire'].str.cat(sep=' ')
-            stopwords_fr = STOPWORDS.union({'le', 'la', 'les', 'un', 'une', 'film', 'est', 'dans', 'cest'})
-            wordcloud = WordCloud(width=800, height=400, background_color='white', stopwords=stopwords_fr).generate(comments)
+            film_titles = df['Titre du film'].unique()
+            selected_film_title = st.selectbox("Sélectionner un titre de film", options=film_titles)
+            filtered_comments = df[df['Titre du film'] == selected_film_title]['Commentaire'].str.cat(sep=' ')
+            stopwords_fr = STOPWORDS.union({'le', 'la', 'les', 'un', 'une', 'de', 'et', 'à', 'dans', 'ce', 'ces', 'pour', 'est', 'en', 'sur', 'qui', 'ce','se','que', 'mais', 'sont', 'avec','cest',"c'est",'plus', 'aux', 'ou', 'il', 'du', 'au', 'ne', 'pas', 'des', 'dun', 'une', 'par', 'comme', 'ont', 'leur', 'leurs', 'ils', 'elles', 'tout', 'tous', 'toutes', 'faire', 'fait', 'faite', 'faits', 'film','son', 'je', 'ça', 'ses', 'cette', 'très', 'vous', 'nous', 'meme', 'même', 'aussi'})
+            
+            wordcloud = WordCloud(width=800, height=400, background_color='white', stopwords=stopwords_fr).generate(filtered_comments)
+            st.write("### Nuage de mots pour le film sélectionné")
             fig, ax = plt.subplots(figsize=(10, 5))
             ax.imshow(wordcloud, interpolation='bilinear')
             ax.axis("off")
             st.pyplot(fig)
+            plt.imshow(wordcloud, interpolation='bilinear')
+            plt.axis("off")
+            plt.show()
 
     def display_csv(df):
         st.markdown("<h2 style='color: #1a73e8;'>📂 Exporter les Données</h2>", unsafe_allow_html=True)

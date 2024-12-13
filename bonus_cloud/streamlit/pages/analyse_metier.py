@@ -6,10 +6,10 @@ import altair as alt
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
-
 # Télécharger les ressources nécessaires de NLTK
 nltk.download('punkt')
 nltk.download('stopwords')
+nltk.download('punkt_tab')
 
 # Configuration de la page
 st.set_page_config(
