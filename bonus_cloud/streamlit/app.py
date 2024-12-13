@@ -1,6 +1,5 @@
 import streamlit as st
 
-
 Page_accueil = st.Page(
     page= "pages/Accueil.py",
     title= "Accueil",
