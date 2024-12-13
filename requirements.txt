@@ -9,6 +9,6 @@ wordcloud
 bs4
 nltk
 scrapy
-selenium
+# selenium
 time
 datetime
