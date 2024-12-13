@@ -73,7 +73,7 @@ else:
 st.markdown("<h2 style='color: #1a73e8;'>🎥 Avis par catégorie de film</h2>", unsafe_allow_html=True)
 
 # Chemin vers le fichier de sortie
-output_file_path = os.path.join("output", "sentiments_resultat_bis.csv")
+output_file_path = os.path.join("bonus_cloud","streamlit","output", "sentiments_resultat_bis.csv")
 
 if os.path.exists(output_file_path):
     df = pd.read_csv(output_file_path, delimiter=';', encoding='latin1')

@@ -90,7 +90,7 @@ def display_movie_info(movie_data, movie_reviews, all_data):
 
 # Interface Streamlit
 st.sidebar.header("🎬 Sélectionnez un Film")
-CSV_FILE_PATH = "output/sentiments_resultat_final.csv"
+CSV_FILE_PATH = "bonus_cloud/streamlit/output/sentiments_resultat_final.csv"
 data = load_data(CSV_FILE_PATH)
 
 # Sélection du film
