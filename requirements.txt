@@ -2,11 +2,13 @@ streamlit
 pandas
 plotly
 chardet
-pygwalker
 transformers
 numpy==1.26.4
-scikit-learn
 torch
 wordcloud
 bs4
 nltk
+scrapy
+selenium
+time
+datetime
