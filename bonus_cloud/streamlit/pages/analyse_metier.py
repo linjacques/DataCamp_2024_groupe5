@@ -32,10 +32,6 @@ st.markdown(
 @st.cache_data
 def load_data(file_path):
     data = pd.read_csv(file_path, sep=';', encoding='utf-8')
-    data['Note'] = pd.to_numeric(data['Note'].str.replace(',', '.'), errors='coerce')
-    data['Note IA'] = pd.to_numeric(data['Note IA'], errors='coerce')
-    # Convertir les dates en toute lettre en datetime
-    data['Date de publication'] = pd.to_datetime(data['Date de publication'], errors='coerce', dayfirst=True)
     return data
 
 # Générer un nuage de mots
