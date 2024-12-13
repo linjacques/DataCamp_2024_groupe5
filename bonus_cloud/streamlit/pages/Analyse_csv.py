@@ -11,7 +11,7 @@ st.set_page_config(
 # Titre principal stylisé
 st.markdown(
     """
-        <h1 style="color: #1a73e8; font-family: Arial, sans-serif; font-size: 2.5em;">
+        <h1 style="color: #1a73e8; font-family: Arial, sans-serif; font-size: 2.5em; text-align: center;">
             📊 Analyse dynamique des données
         </h1>
     """,
